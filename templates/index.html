@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block content %}
+<h2 class="subtitle">{{ section.title }}</h2>
+<ul>
+  {% for page in paginator.pages %}
+  <li>
+    <div class="notification mb-4">
+      <div class="container">
+        <h3 class="title is-3">
+          <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+        </h3>
+        {% if page.description %}
+        <h4 class="title is-4">
+          {{ page.description }}
+        </h4>
+        {% endif %}
+      </div>
+      <div class="container">
+        {% if page.summary %}
+        <div class="content">
+          {{ page.summary | safe }}
+        </div>
+        <a class="button" href="{{ page.permalink }}#continue-reading">Continue Reading</a>
+        {% endif %}
+      </div>
+      <div class="container">
+        <small>
+          <div>
+            Posted by {{ config.extra.author }} on
+            <time datetime="{{ page.date }}">{{ page.date }}</time>
+          </div>
+          <!-- <div> -->
+          <!--   Reading time about {{ macros::readingtime(time=page.reading_time) }} -->
+          <!-- </div> -->
+          {% if page.taxonomies.tags %}
+          <div>
+            Tags:
+            <div class="tags">
+              {% for tag in page.taxonomies.tags %}
+              <span class="tag is-link">
+                <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">
+                  {{ tag }}
+                </a>
+              </span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </small>
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+
+  <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+    {% if paginator.next %}
+    <a class="pagination-previous" href="{{ paginator.next }}">Older posts</a>
+    {% endif %}
+    {% if paginator.previous %}
+    <a class="pagination-next" href="{{ paginator.previous }}">Newer posts</a>
+    {% endif %}
+    {% if paginator.number_pagers > 1 %}
+    <ul class="pagination-list">
+      Page {{ paginator.current_index }} of {{ paginator.number_pagers }}
+    </ul>
+    {% endif %}
+  </nav>
+</ul>
+{% endblock page %}

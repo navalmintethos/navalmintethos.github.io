@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="title">Tags</h2>
+{% if page.description %}
+<h3 class="subtitle">{{ terms | length }} tags in total</h3>
+{% endif %}
+<div class="content">
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width:100%">Tag</th>
+        <th># Articles</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tag in terms %}
+      <tr>
+        <td>
+          <a href="{{ get_taxonomy_url(kind="tags", name=tag.name) }}">
+          {{ tag.name }}
+          </a>
+        </td>
+        <td>
+          {{ tag.pages | length }}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}
