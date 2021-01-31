@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 
+{% block extra_head %}
+<link rel="canonical" href="{{ page.permalink }}">
+
+{% if page.description %}
+<meta property="og:description" content="{{ page.description }}" />
+<meta name="description" content="{{ page.description }}">
+{% endif %}
+<meta property="og:title" content="{{ page.title }}" />
+<meta property="og:url" content="{{ page.permalink }}" />
+<meta property="og:site_name" content="{{ page.title }}" />
+<meta property="og:locale" content="en_US,de_DE" />
+{% endblock extra_head %}
+
 {% block content %}
 <h2 class="title">{{ page.title }}</h2>
 {% if page.description %}
