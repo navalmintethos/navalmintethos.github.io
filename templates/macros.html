@@ -8,15 +8,15 @@
 
 {% macro page_title(page) %}
 <div class="container mb-2">
-  <h2 class="title">
+  <h1 class="title">
     {% if page.permalink == current_url %}
     {{ page.title }}
     {% else %}
     <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
     {% endif %}
-  </h2>
+  </h1>
   {% if page.description %}
-  <h3 class="subtitle">{{ page.description }}</h3>
+  <h2 class="subtitle">{{ page.description }}</h2>
   {% endif %}
   <small>
     <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32"
