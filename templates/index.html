@@ -14,21 +14,14 @@
 {% endblock extra_head %}
 
 {% block content %}
+{% if section.title %}
 <h2 class="subtitle">{{ section.title }}</h2>
+{% endif %}
 <ul>
   {% for page in paginator.pages %}
   <li>
     <div class="notification mb-4">
-      <div class="container mb-4">
-        <h3 class="title">
-          <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
-        </h3>
-        {% if page.description %}
-        <h4 class="subtitle">
-          {{ page.description }}
-        </h4>
-        {% endif %}
-      </div>
+      {{ macros::page_title(page = page) }}
       {% if page.summary %}
         <div class="container mb-2">
           <div class="content">
@@ -37,31 +30,7 @@
           <a class="button" href="{{ page.permalink }}#continue-reading">Continue Reading</a>
         </div>
       {% endif %}
-      <div class="container">
-        <small>
-          <div>
-            Posted by {{ config.extra.author }} on
-            <time datetime="{{ page.date }}">{{ page.date }}</time>
-          </div>
-          <!-- <div> -->
-          <!--   Reading time about {{ macros::readingtime(time=page.reading_time) }} -->
-          <!-- </div> -->
-          {% if page.taxonomies.tags %}
-          <div>
-            Tags:
-            <div class="tags">
-              {% for tag in page.taxonomies.tags %}
-              <span class="tag is-link">
-                <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">
-                  {{ tag }}
-                </a>
-              </span>
-              {% endfor %}
-            </div>
-          </div>
-          {% endif %}
-        </small>
-      </div>
+      {{ macros::page_footer(page = page) }}
     </div>
   </li>
   {% endfor %}
