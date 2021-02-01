@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config.title }} - {{ config.extra.author }}</title>
-    <link rel="stylesheet" href="/style.css">
-    <link href="/ubuntu.dc02fbae194dc0c002585f299a62b18d86c0ea25.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ get_url(path = "style.css", cachebust = true) }}">
+    <link rel="stylesheet" href="{{ get_url(path = "ubuntu.css", cachebust = true) }}">
     <link rel="alternate" type="application/rss+xml" title="{{ config.title }} &raquo; Feed" href="/{{ config.feed_filename }}" />
 
     <meta property="og:type" content="website" />
