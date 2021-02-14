@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://navalmintethos.github.io/sitemap.xml
