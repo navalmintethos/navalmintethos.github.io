@@ -21,7 +21,7 @@
 {% block content %}
 <div class="notification">
   {{ macros::page_title(page = page) }}
-  <div class="content">
+  <div id="content" class="content">
     {{ page.content | safe }}
   </div>
   {{ macros::page_footer(page = page) }}
