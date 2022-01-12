@@ -13,10 +13,6 @@ body {
   text-align:justify;
 }
 
-#main {
-  max-width: 80ch;
-}
-
 .content-column {
   width: 100%;
 }

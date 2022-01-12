@@ -24,7 +24,7 @@
       {{ macros::page_title(page = page) }}
       {% if page.summary %}
         <div class="container mb-2">
-          <div class="content">
+          <div id="content" class="content">
             {{ page.summary | safe }}
           </div>
           <a class="button" href="{{ page.permalink }}#continue-reading">Continue Reading</a>
