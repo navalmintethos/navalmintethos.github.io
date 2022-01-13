@@ -1,50 +1,58 @@
 {% macro rfc3339_date(date) %}{{ date | date(format = "%Y-%m-%dT%H:%M:%S%z") }}{% endmacro rfc3339_date %}
 
 {% macro page_title(page) %}
-<div class="container mb-2">
-  <h1 class="title">
-    {% if page.permalink == current_url %}
-    {{ page.title }}
-    {% else %}
-    <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
-    {% endif %}
-  </h1>
-  {% if page.description %}
-  <h2 class="subtitle">{{ page.description }}</h2>
-  {% endif %}
-  <small>
-    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32"
-         width="16" height="16" fill="none" stroke="currentcolor"
-         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
-      <circle cx="16" cy="16" r="14"/>
-      <path d="M16 8 L16 16 20 20"/>
-    </svg>
-    <span>{{ page.reading_time }} minute read</span>
-    {% if page.date %}
-    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32"
-         width="16" height="16" fill="none" stroke="currentcolor"
-         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
-      <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"/>
-    </svg>
+<div class="container mb-4">
+  <div class="media">
+    <div class="media-content">
+      <h1 class="title">
+        {% if page.permalink == current_url %}
+        {{ page.title }}
+        {% else %}
+        <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+        {% endif %}
+      </h1>
+      {% if page.description %}
+      <h2 class="subtitle">{{ page.description }}</h2>
+      {% endif %}
+      <div class="tags">
+        <span class="tag">
+          <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32"
+               width="16" height="16" fill="none" stroke="currentcolor"
+               stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+            <circle cx="16" cy="16" r="14"/>
+            <path d="M16 8 L16 16 20 20"/>
+          </svg>
+          <span>{{ page.reading_time }} minute{{ page.reading_time | pluralize }}</span>
+        </span>
+        {% if page.date %}
 
-    Published: <time datetime="{{ self::rfc3339_date(date=page.date) }}">{{ page.date | date(format="%F") }}</time>
-    {% if page.updated %}
-    (Updated: <time datetime="{{ self::rfc3339_date(date=page.updated) }}">{{ page.updated | date(format="%F") }}</time>)
-    {% endif %}
-    {% endif %}
-  </small>
+        <span class="tag">
+          <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32"
+               width="16" height="16" fill="none" stroke="currentcolor"
+               stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+            <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"/>
+          </svg>
+          <time datetime="{{ self::rfc3339_date(date=page.date) }}">{{ page.date | date(format="%F") }}</time>
+          {% if page.updated %}
+          (Updated: <time datetime="{{ self::rfc3339_date(date=page.updated) }}">{{ page.updated | date(format="%F") }}</time>)
+          {% endif %}
+          {% endif %}
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
 {% endmacro page_title %}
 
 {% macro page_footer(page) %}
 {% if page.taxonomies.tags %}
-<div class="container">
+<footer class="card-footer">
   <small>
-    <div>
-      Tags:
+    Tags:
+    <div class="field is-grouped is-grouped-multiline">
       <div class="tags">
         {% for tag in page.taxonomies.tags %}
-        <span class="tag is-link">
+        <span class="tag">
           <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">
             {{ tag }}
           </a>
@@ -53,6 +61,6 @@
       </div>
     </div>
   </small>
-</div>
+</footer>
 {% endif %}
 {% endmacro page_footer %}

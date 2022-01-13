@@ -20,17 +20,19 @@
 <ul>
   {% for page in paginator.pages %}
   <li>
-    <div class="notification mb-4">
-      {{ macros::page_title(page = page) }}
-      {% if page.summary %}
+    <div class="card mb-4">
+      <div class="card-content">
+        {{ macros::page_title(page = page) }}
+        {% if page.summary %}
         <div class="container mb-2">
           <div id="content" class="content">
             {{ page.summary | safe }}
           </div>
-          <a class="button" href="{{ page.permalink }}#continue-reading">Continue Reading</a>
+          <!-- <a class="button" href="{{ page.permalink }}#continue-reading">Continue Reading</a> -->
         </div>
-      {% endif %}
-      {{ macros::page_footer(page = page) }}
+        {% endif %}
+        {{ macros::page_footer(page = page) }}
+      </div>
     </div>
   </li>
   {% endfor %}
